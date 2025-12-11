@@ -1,11 +1,11 @@
-package com.example.board;
+package com.yujeong.board;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
 
 @SpringBootApplication
-@ComponentScan(basePackages = "com.example.scope")
+@ComponentScan(basePackages = "com.yujeong.board")
 public class BoardRestApiApplication {
 
 	public static void main(String[] args) {
