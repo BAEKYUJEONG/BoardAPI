@@ -9,6 +9,7 @@ import lombok.*;
 @AllArgsConstructor
 @Builder
 public class Comment {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -16,9 +17,14 @@ public class Comment {
     @Column(nullable = false, length = 100)
     private String author;
 
-    @Column(columnDefinition = "TEXT") // columnDefinition : DB에 생성될 컬럼의 SQL 타입을 직접 지정
-    private String content; // 내용 : "TEXT" 긴 본문 저장
+    @Column(columnDefinition = "TEXT")
+    private String content;
 
-    private Long userId;
-    private Long postId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id", nullable = false)
+    private User user;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "post_id", nullable = false)
+    private Post post;
 }

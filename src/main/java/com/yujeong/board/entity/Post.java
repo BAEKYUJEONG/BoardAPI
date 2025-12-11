@@ -3,12 +3,16 @@ package com.yujeong.board.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
 @Builder
 public class Post {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -23,9 +27,14 @@ public class Post {
     private String content; // 내용 : "TEXT" 긴 본문 저장
 
     // 연관관계 설정 시 서비스에서 찾아서 DTO로 주입
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id", nullable = false)
     private User user;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "board_id", nullable = false)
     private Board board;
 
-    // private Long userId;
-    // private Long boardId;
+    @OneToMany(mappedBy = "post")
+    private List<Comment> comments = new ArrayList<>();
 }
