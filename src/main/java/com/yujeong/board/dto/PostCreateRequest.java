@@ -12,6 +12,35 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
+public class PostCreateRequest {
+    private String title;
+    private String content;
+    private Long userId;
+    private Long boardId;
+
+    public Post toEntity(User user, Board board) {
+        return Post.builder()
+                .title(title)
+                .author(user.getName())
+                .content(content)
+                .user(user)
+                .board(board)
+                .build();
+    }
+}
+/*
+import com.yujeong.board.entity.Board;
+import com.yujeong.board.entity.Post;
+import com.yujeong.board.entity.User;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 // DTO는 엔티티를 참조하지 않는다! 의존도 최소화
 public class PostRequestDto {
     private String title;
@@ -31,3 +60,4 @@ public class PostRequestDto {
                 .build();
     }
 }
+*/

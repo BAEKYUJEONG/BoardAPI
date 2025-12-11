@@ -10,12 +10,14 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class BoardRequestDto {
+public class BoardResponse {
+    private Long id;
     private String name;
 
-    public Board toEntity() {
-        return Board.builder()
-                .name(name)
+    public static BoardResponse from(Board board) {
+        return BoardResponse.builder()
+                .id(board.getId())
+                .name(board.getName())
                 .build();
     }
 }
